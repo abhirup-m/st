@@ -11,4 +11,4 @@ This is my personalized build of the simple terminal [st](https://st.suckless.or
 It supports **image previews** in ranger using **w3m** (and Ueberzug).
 
 st in action:
-![](links.avi)
+![](opening-links.avi)
