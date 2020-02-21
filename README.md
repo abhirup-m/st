@@ -9,6 +9,3 @@ This is my personalized build of the simple terminal [st](https://st.suckless.or
 + **mouse-scrollback** - scrolling using mouse
 + **Xresources** - defining colors and some other variables from a .Xresources which can be reloaded without recompiling st
 It supports **image previews** in ranger using **w3m** (and Ueberzug).
-
-st in action:
-![](opening-links.avi)
