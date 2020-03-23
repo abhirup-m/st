@@ -103,7 +103,7 @@ unsigned int tabspaces = 4;
 // };
 static const char *colorname[] = 
 {
-	"#181818",
+	"#0d1011",
 	"#ab4642",
 	"#a1b56c",
 	"#f7ca88",
@@ -134,7 +134,7 @@ static unsigned int defaultrcs = 0;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 6;
+static unsigned int cursorshape = 2;
 
 /*
  * Default columns and rows numbers
