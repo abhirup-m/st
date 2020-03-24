@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Fira Code Medium:size=15:antialias=true:autohint=true";
+static char *font = "Source Code Pro:size=15:antialias=true:autohint=true";
 static int borderpx = 20;
 
 /*
@@ -101,32 +101,29 @@ unsigned int tabspaces = 4;
 //   "#3971ed", /* base0F */
 //   "#ffffff", /* base07 */
 // };
-static const char *colorname[] = 
-{
-	"#0d1011",
-	"#ab4642",
-	"#a1b56c",
-	"#f7ca88",
-	"#7cafc2",
-	"#ba8baf",
-	"#86c1b9",
-	"#d8d8d8",
-	"#585858",
-	"#ab4642",
-	"#a1b56c",
-	"#f7ca88",
-	"#7cafc2",
-	"#ba8baf",
-	"#86c1b9",
-	"#f8f8f8",
-};
 
-unsigned int defaultfg = 7;
-unsigned int defaultbg = 0;
-static unsigned int defaultcs = 13;
-static unsigned int defaultrcs = 0;
+// static const char *colorname[] = 
+// {
+// 	"#181820",
+// 	"#ab4642",
+// 	"#a1b56c",
+// 	"#f7ca88",
+// 	"#7cafc2",
+// 	"#ba8baf",
+// 	"#86c1b9",
+// 	"#d8d8d8",
+// 	"#585858",
+// 	"#ab4642",
+// 	"#a1b56c",
+// 	"#f7ca88",
+// 	"#7cafc2",
+// 	"#ba8baf",
+// 	"#86c1b9",
+// 	"#f8f8f8",
+// };
 
 
+#include "colors/base16-molokai-theme.h"
 /*
  * Default shape of cursor
  * 2: Block ("█")
