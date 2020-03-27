@@ -123,7 +123,7 @@ unsigned int tabspaces = 4;
 // };
 
 
-#include "colors/base16-molokai-theme.h"
+#include "colors/base16-chalk-theme.h"
 /*
  * Default shape of cursor
  * 2: Block ("█")
