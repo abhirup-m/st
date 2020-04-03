@@ -5,7 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Source Code Pro Medium:size=16:antialias=true:autohint=true";
+static char *font = "DroidSansMono Nerd Font:style=Medium:size=15:antialias=true:autohint=true";
+
 static int borderpx = 20;
 
 /*
@@ -68,7 +69,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 4;
 
 
-#include "colors/base16-chalk-theme.h"
+#include "colors/base16-gruvbox-dark-hard-theme.h"
 /*
  * Default shape of cursor
  * 2: Block ("█")
