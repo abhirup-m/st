@@ -5,10 +5,9 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "DroidSansMono Nerd Font:style=Medium:size=15:antialias=true:autohint=true";
+static char *font = "DroidSansMono Nerd Font:style=regular:size=16:antialias=true:autohint=true";
 
 static int borderpx = 20;
-
 /*
  * What program is execed by st depends of these precedence rules:
  * 1: program passed with -e
@@ -68,8 +67,8 @@ char *termname = "st-256color";
 
 unsigned int tabspaces = 4;
 
-
 #include "colors/base16-gruvbox-dark-hard-theme.h"
+
 /*
  * Default shape of cursor
  * 2: Block ("█")
@@ -77,6 +76,7 @@ unsigned int tabspaces = 4;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
+
 static unsigned int cursorshape = 2;
 
 /*
