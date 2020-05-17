@@ -67,7 +67,7 @@ char *termname = "st-256color";
 
 unsigned int tabspaces = 4;
 
-#include "colors/base16-gruvbox-dark-hard-theme.h"
+#include "colors/base16-molokai-theme.h"
 
 /*
  * Default shape of cursor
