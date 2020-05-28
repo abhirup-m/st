@@ -1,10 +1,10 @@
 # st version
-VERSION = 0.8.2
+VERSION = 0.8.3
 
 # Customize below to fit your system
 
 # paths
-PREFIX = ~/.local
+PREFIX = ~/.local/bin
 MANPREFIX = $(PREFIX)/share/man
 
 X11INC = /usr/X11R6/include

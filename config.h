@@ -6,18 +6,20 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "Fira Code:size=16:antialias=true:autohint=true";
-
 static int borderpx = 20;
+
 /*
  * What program is execed by st depends of these precedence rules:
  * 1: program passed with -e
- * 2: utmp option
+ * 2: scroll and/or utmp
  * 3: SHELL environment variable
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/zsh";
+static char *shell = "/bin/bash";
 char *utmp = NULL;
+/* scroll program: to enable use a string like "scroll" */
+char *scroll = "scroll";
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* identification sequence returned in DA and DECID */
@@ -41,20 +43,25 @@ static unsigned int tripleclicktimeout = 600;
 /* alt screens */
 int allowaltscreen = 1;
 
-/* frames per second st should at maximum draw to the screen */
-static unsigned int xfps = 120;
-static unsigned int actionfps = 30;
+/*
+ * draw latency range in ms - from new content/keypress/etc until drawing.
+ * within this range, st draws when content stops arriving (idle). mostly it's
+ * near minlatency, but it waits longer for slow updates to avoid partial draw.
+ * low minlatency will tear/flicker more, as it can "detect" idle too early.
+ */
+static double minlatency = 8;
+static double maxlatency = 33;
 
 /*
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
-static unsigned int blinktimeout = 0;
+static unsigned int blinktimeout = 800;
 
 /*
  * thickness of underline and bar cursors
  */
-static unsigned int cursorthickness = 1;
+static unsigned int cursorthickness = 2;
 
 /*
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
@@ -65,9 +72,65 @@ static int bellvolume = 0;
 /* default TERM value */
 char *termname = "st-256color";
 
-unsigned int tabspaces = 4;
+/*
+ * spaces per tab
+ *
+ * When you are changing this value, don't forget to adapt the »it« value in
+ * the st.info and appropriately install the st.info in the environment where
+ * you use this st version.
+ *
+ *	it#$tabspaces,
+ *
+ * Secondly make sure your kernel is not expanding tabs. When running `stty
+ * -a` »tab0« should appear. You can tell the terminal to not expand tabs by
+ *  running following command:
+ *
+ *	stty tabs
+ */
+unsigned int tabspaces = 8;
+
 
 #include "colors/base16-molokai-theme.h"
+
+
+/* Terminal colors (16 first used in escape sequence) */
+// 	static const char *colorname[] = {
+// 		/* 8 normal colors */
+// 		"black",
+// 		"red3",
+// 		"green3",
+// 		"yellow3",
+// 		"blue2",
+// 		"magenta3",
+// 		"cyan3",
+// 		"gray90",
+// 	
+// 		/* 8 bright colors */
+// 		"gray50",
+// 		"red",
+// 		"green",
+// 		"yellow",
+// 		"#5c5cff",
+// 		"magenta",
+// 		"cyan",
+// 		"white",
+// 	
+// 		[255] = 0,
+// 	
+// 		/* more colors can be added after 255 to use with DefaultXX */
+// 		"#cccccc",
+// 		"#555555",
+// 	};
+// 	
+// 	
+// 	/*
+// 	 * Default colors (colorname index)
+// 	 * foreground, background, cursor, reverse cursor
+// 	 */
+// 	unsigned int defaultfg = 7;
+// 	unsigned int defaultbg = 0;
+// 	static unsigned int defaultcs = 256;
+// 	static unsigned int defaultrcs = 257;
 
 /*
  * Default shape of cursor
@@ -76,7 +139,6 @@ unsigned int tabspaces = 4;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-
 static unsigned int cursorshape = 2;
 
 /*
@@ -99,11 +161,12 @@ static unsigned int mousebg = 0;
  */
 static unsigned int defaultattr = 11;
 
+/*
+ * Force mouse select/shortcuts while mask is active (when MODE_MOUSE is set).
+ * Note that if you want to use ShiftMask with selmasks, set this to an other
+ * modifier, set to 0 to not use it.
+ */
 static uint forcemousemod = ShiftMask;
-
-static char *openurl[] = { "/bin/sh", "-c",
-    "sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./&%?#=_+-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)'| uniq | sed 's/^www./http:\\/\\/www\\./g' | xargs -r open_url", "externalpipe", NULL };
-//static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
 
 /*
  * Internal mouse shortcuts.
@@ -114,9 +177,15 @@ static MouseShortcut mshortcuts[] = {
 	{ ShiftMask,            Button4, kscrollup,      {.i = 1} },
 	{ ShiftMask,            Button5, kscrolldown,    {.i = 1} },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
+	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
+	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
 	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
+
+static char *urlcmd[] = { "/bin/sh", "-c",
+    "tmp=$(sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' ); IFS=; [ ! -z $tmp ] && echo $tmp | dmenu -l 10 | tr -d '\n' | xargs -r firefox",
+    "externalpipe", NULL };
 
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
@@ -134,14 +203,38 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
+	{ MODKEY,               XK_o,           externalpipe,   {.v = urlcmd } },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
-	{ MODKEY,               XK_l,           externalpipe,   {.v = openurl } },
-//	{ MODKEY,               XK_o,           externalpipe,   {.v = copyoutput } },
 };
 
+/*
+ * Special keys (change & recompile st.info accordingly)
+ *
+ * Mask value:
+ * * Use XK_ANY_MOD to match the key no matter modifiers state
+ * * Use XK_NO_MOD to match the key alone (no modifiers)
+ * appkey value:
+ * * 0: no value
+ * * > 0: keypad application mode enabled
+ * *   = 2: term.numlock = 1
+ * * < 0: keypad application mode disabled
+ * appcursor value:
+ * * 0: no value
+ * * > 0: cursor application mode enabled
+ * * < 0: cursor application mode disabled
+ *
+ * Be careful with the order of the definitions because st searches in
+ * this table sequentially, so any XK_ANY_MOD must be in the last
+ * position for a key.
+ */
+
+/*
+ * If you want keys other than the X11 function keys (0xFD00 - 0xFFFF)
+ * to be mapped below, add them to this array.
+ */
 static KeySym mappedkeys[] = { -1 };
 
 /*
