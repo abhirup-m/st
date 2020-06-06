@@ -19,7 +19,7 @@ static const char *colorname[] = {
   "#62d6e8", /* base0D */
   "#b45bcf", /* base0E */
   "#a1efe4", /* base0C */
-  "#e9e9f4", /* base05 */
+  "#ffffff", /* base05 */
   "#626483", /* base03 */
   "#b45bcf", /* base09 */
   "#3a3c4e", /* base01 */
@@ -28,6 +28,11 @@ static const char *colorname[] = {
   "#f1f2f8", /* base06 */
   "#00f769", /* base0F */
   "#f7f7fb", /* base07 */
+  [255] = 0,
+ 
+ /* more colors can be added after 255 to use with DefaultXX */
+  "#cccccc",
+  "#555555",
 };
 
 unsigned int defaultfg = 7;
