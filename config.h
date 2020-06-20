@@ -90,7 +90,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 
-#include "colors/base16-molokai-theme.h"
+#include "colors/gruvbox.h"
 
 
 /* Terminal colors (16 first used in escape sequence) */
