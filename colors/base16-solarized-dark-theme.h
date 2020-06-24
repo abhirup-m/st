@@ -12,14 +12,14 @@
 
 
 static const char *colorname[] = {
-  "#002b36", /* base00 */
+  "#000912", /* base00 */
   "#dc322f", /* base08 */
   "#859900", /* base0B */
   "#b58900", /* base0A */
   "#268bd2", /* base0D */
   "#6c71c4", /* base0E */
   "#2aa198", /* base0C */
-  "#93a1a1", /* base05 */
+  "#ffffff", /* base05 */
   "#657b83", /* base03 */
   "#cb4b16", /* base09 */
   "#073642", /* base01 */
