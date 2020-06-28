@@ -188,7 +188,7 @@ static char *copycmd[] = { "/bin/sh", "-c",
     "externalpipe", NULL };
 
 static char *urlcmd[] = { "/bin/sh", "-c",
-    "tmp=$(sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' ); IFS=; [ -z $tmp ] && exit; [ $(echo $tmp | wc -l) = 1 ] && firefox $tmp || echo $tmp | dmenu -l 10 | tr -d '\n' | xargs -r firefox",
+    "tmp=$(sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' ); IFS=; [ -z $tmp ] && exit; [ $(echo $tmp | wc -l) = 1 ] && $BROWSER $tmp || echo $tmp | dmenu -l 10 | tr -d '\n' | xargs -r $BROWSER",
     "externalpipe", NULL };
 
 
