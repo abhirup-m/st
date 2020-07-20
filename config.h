@@ -42,6 +42,8 @@ static unsigned int tripleclicktimeout = 600;
 
 /* alt screens */
 int allowaltscreen = 1;
+float alpha = 0.85;
+
 
 /* allow certain non-interactive (insecure) window operations such as:
    setting the clipboard text */
@@ -117,7 +119,7 @@ unsigned int tabspaces = 8;
  		"#5c5cff",
  		"magenta",
  		"cyan",
- 		"white",
+ 		"#cccccc",
  	
  		[255] = 0,
  	
@@ -131,7 +133,7 @@ unsigned int tabspaces = 8;
  	 * Default colors (colorname index)
  	 * foreground, background, cursor, reverse cursor
  	 */
- 	unsigned int defaultfg = 7;
+ 	unsigned int defaultfg = 15;
  	unsigned int defaultbg = 0;
  	static unsigned int defaultcs = 256;
  	static unsigned int defaultrcs = 257;
