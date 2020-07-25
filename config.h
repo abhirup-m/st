@@ -189,10 +189,6 @@ static MouseShortcut mshortcuts[] = {
 	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
 
-static char *copycmd[] = { "/bin/sh", "-c",
-    "dmenu -l 20",
-    "externalpipe", NULL };
-
 static char *urlcmd[] = { "/bin/sh", "-c",
     "tmp=$(sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' ); IFS=; [ -z $tmp ] && exit; [ $(echo $tmp | wc -l) = 1 ] && $BROWSER $tmp || echo $tmp | dmenu -l 10 | tr -d '\n' | xargs -r $BROWSER",
     "externalpipe", NULL };
@@ -216,7 +212,6 @@ static Shortcut shortcuts[] = {
 	{ Mod1Mask,             XK_p,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ MODKEY,               XK_o,           externalpipe,   {.v = urlcmd } },
-	{ MODKEY,               XK_l,           externalpipe,   {.v = copycmd } },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ ShiftMask,            XK_Up,     	kscrollup,      	{.i = -1} },
