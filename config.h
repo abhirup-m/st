@@ -122,7 +122,7 @@ unsigned int tabspaces = 8;
 // 		"#cccccc",
 //
 //		Gruvbox theme
-		"#151312", /* hard contrast: #1d2021 / soft contrast: #32302f */
+		"#1d2021", /* hard contrast: #1d2021 / soft contrast: #32302f */
 		"#cc241d", /* red     */
 		"#98971a", /* green   */
 		"#d79921", /* yellow  */
