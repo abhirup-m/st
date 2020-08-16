@@ -101,26 +101,45 @@ unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
  	static const char *colorname[] = {
- 		/* 8 normal colors */
- 		"black",
- 		"red3",
- 		"green3",
- 		"yellow3",
- 		"blue2",
- 		"magenta3",
- 		"cyan3",
- 		"gray90",
- 	
- 		/* 8 bright colors */
- 		"gray50",
- 		"red",
- 		"green",
- 		"yellow",
- 		"#5c5cff",
- 		"magenta",
- 		"cyan",
- 		"#cccccc",
- 	
+// 		/* 8 normal colors */
+// 		"black",
+// 		"red3",
+// 		"green3",
+// 		"yellow3",
+// 		"blue2",
+// 		"magenta3",
+// 		"cyan3",
+// 		"gray90",
+// 	
+// 		/* 8 bright colors */
+// 		"gray50",
+// 		"red",
+// 		"green",
+// 		"yellow",
+// 		"#5c5cff",
+// 		"magenta",
+// 		"cyan",
+// 		"#cccccc",
+//
+//		Gruvbox theme
+		"#151312", /* hard contrast: #1d2021 / soft contrast: #32302f */
+		"#cc241d", /* red     */
+		"#98971a", /* green   */
+		"#d79921", /* yellow  */
+		"#458588", /* blue    */
+		"#b16286", /* magenta */
+		"#689d6a", /* cyan    */
+		"#a89984", /* white   */
+			   /* 8 bright colors */
+		"#928374", /* black   */
+		"#fb4934", /* red     */
+		"#b8bb26", /* green   */
+		"#fabd2f", /* yellow  */
+		"#83a598", /* blue    */
+		"#d3869b", /* magenta */
+		"#8ec07c", /* cyan    */
+		"#ebdbb2", /* white   */
+
  		[255] = 0,
  	
  		/* more colors can be added after 255 to use with DefaultXX */
