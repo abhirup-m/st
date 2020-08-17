@@ -138,7 +138,7 @@ unsigned int tabspaces = 8;
 		"#83a598", /* blue    */
 		"#d3869b", /* magenta */
 		"#8ec07c", /* cyan    */
-		"#ebdbb2", /* white   */
+		"#ffffff", /* white   */
 
  		[255] = 0,
  	
