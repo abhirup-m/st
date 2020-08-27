@@ -42,7 +42,7 @@ static unsigned int tripleclicktimeout = 600;
 
 /* alt screens */
 int allowaltscreen = 1;
-float alpha = 0.93;
+float alpha = 0.9;
 
 
 /* allow certain non-interactive (insecure) window operations such as:
