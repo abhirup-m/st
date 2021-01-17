@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Fira Code:size=16:antialias=true:autohint=true";
+static char *font = "BlexMono Nerd Font:size=16:antialias=true:autohint=true";
 static int borderpx = 10;
 
 /*
@@ -122,6 +122,7 @@ unsigned int tabspaces = 8;
 // 		"#cccccc",
 //
 //		Gruvbox theme
+//
 		"#1d2021", /* hard contrast: #1d2021 / soft contrast: #32302f */
 		"#cc241d", /* red     */
 		"#98971a", /* green   */
@@ -145,6 +146,30 @@ unsigned int tabspaces = 8;
  		/* more colors can be added after 255 to use with DefaultXX */
  		"#cccccc",
  		"#555555",
+
+//
+//		// Nord theme 
+//		"#3b4252", /* black   */
+//		"#bf616a", /* red     */
+//		"#a3be8c", /* green   */
+//		"#ebcb8b", /* yellow  */
+//		"#81a1c1", /* blue    */
+//		"#b48ead", /* magenta */
+//		"#88c0d0", /* cyan    */
+//		"#e5e9f0", /* white   */
+//		"#4c566a", /* black   */
+//		"#bf616a", /* red     */
+//		"#a3be8c", /* green   */
+//		"#ebcb8b", /* yellow  */
+//		"#81a1c1", /* blue    */
+//		"#b48ead", /* magenta */
+//		"#8fbcbb", /* cyan    */
+//		"#eceff4", /* white   */
+//
+// 		[255] = 0,
+//
+//		"#2e3440", /* background */
+//		"#d8dee9", /* foreground */
  	};
  	
  	
@@ -211,7 +236,6 @@ static MouseShortcut mshortcuts[] = {
 static char *urlcmd[] = { "/bin/sh", "-c",
     "tmp=$(sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' ); IFS=; [ -z $tmp ] && exit; [ $(echo $tmp | wc -l) = 1 ] && $BROWSER $tmp || echo $tmp | dmenu -l 10 | tr -d '\n' | xargs -r $BROWSER",
     "externalpipe", NULL };
-
 
 
 /* Internal keyboard shortcuts. */
