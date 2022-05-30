@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "BlexMono Nerd Font:size=16:antialias=true:autohint=true";
+static char *font = "FiraCode Nerd Font:style=Regular:size=15:antialias=true:autohint=true";
 static int borderpx = 10;
 
 /*
@@ -246,7 +246,7 @@ static MouseShortcut mshortcuts[] = {
 };
 
 static char *urlcmd[] = { "/bin/sh", "-c",
-    "tmp=$(sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' ); IFS=; [ -z $tmp ] && exit; [ $(echo $tmp | wc -l) = 1 ] && $BROWSER $tmp || echo $tmp | dmenu -i --font 'BlexMono Nerd Font-14' -l 10 | tr -d '\n' | xargs -r $BROWSER",
+    "tmp=$(sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' ); IFS=; [ -z $tmp ] && exit; [ $(echo $tmp | wc -l) = 1 ] && $BROWSER $tmp || echo $tmp | dmenu -i | tr -d '\n' | xargs -r $BROWSER",
     "externalpipe", NULL };
 
 
